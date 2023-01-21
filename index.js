@@ -26,6 +26,9 @@ connection.once('open', () => {
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.use('/', (req, res) => {
+    return res.send('MARKETDO GODINEZ')
+})
 app.use('/users', userRoute)
 
 const PORT = process.env.PORT || 2023

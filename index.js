@@ -26,7 +26,7 @@ connection.once('open', () => {
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     return res.send('MARKETDO GODINEZ')
 })
 app.use('/users', userRoute)

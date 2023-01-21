@@ -6,17 +6,18 @@ const User = require('../models/user_model')
 // create
 router.post('/addUser', (req, res) => {
     const user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
+        firstName: req.body.firstName,
+        middleName: req.body.middleName,
+        lastName: req.body.lastName,
+        username: req.body.username,
     })
 
-    User.findOne({ email: req.body.email }).then(_user => {
+    User.findOne({ username: req.body.username }).then(_user => {
         if (_user) {
-            return res.json({ success: false, message: `EMAIL ALREADY TAKEN!` })
+            return res.json({ success: false, message: `USERNAME ALREADY TAKEN!` })
         } else {
             user.save().then(_user => {
-                return res.json({ success: true, message: `USER ADDED! NAME: ${_user.name}` })
+                return res.json({ success: true, message: `USER ADDED!` })
             }).catch(error => { 
                 console.log('AN ERROR OCCURED!', error)
                 return res.json({ success: false, message: `AN ERROR OCCURRED! ${error}` })
@@ -45,9 +46,10 @@ router.patch('/updateUser/:id', (req, res) => {
 
     User.findByIdAndUpdate({ _id: id }, {
         $set: {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
+            firstName: req.body.firstName,
+            middleName: req.body.middleName,
+            lastName: req.body.lastName,
+            username: req.body.username,
         }
     }, { $new: true }).then(_update => {
         if (_update) {
